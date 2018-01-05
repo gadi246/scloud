@@ -43,11 +43,10 @@ class Root extends Component{
       queryData(query)
         .then(({collection, next_href}) => {
           this.setState(({recentSearches}) => {
-            let newSearches;
             if(recentSearches.length === 5){
-              newSearches = recentSearches.shift();
+               recentSearches.shift();
             }
-            newSearches = [...recentSearches, {query, id: Date.now()}];
+            let newSearches = [...recentSearches, {query, id: Date.now()}];
             this.saveToLocalStorage(newSearches);
             return { collection, next_href, query, recentSearches: newSearches }
           });
